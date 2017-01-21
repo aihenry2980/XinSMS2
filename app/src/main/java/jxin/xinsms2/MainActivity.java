@@ -1,6 +1,7 @@
 package jxin.xinsms2;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -69,9 +71,28 @@ public class MainActivity extends AppCompatActivity
 		//Check permission for sms receiver
 		if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED  )
 		{
-
+				ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_SMS);
+				ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS}, 1);
 		}
 
+
+		if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED  )
+		{
+			ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.SEND_SMS);
+			ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+		}
+
+		if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED  )
+		{
+			ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.RECEIVE_SMS);
+			ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECEIVE_SMS}, 1);
+		}
+
+		if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED  )
+		{
+			ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_CONTACTS);
+			ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
+		}
 
 
 
@@ -197,5 +218,24 @@ public class MainActivity extends AppCompatActivity
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
+	}
+
+
+	public  void IssueNoti(String num, String msg)
+	{
+
+		NotificationCompat.Builder mBuilder =
+				(NotificationCompat.Builder) new NotificationCompat.Builder(this)
+						.setSmallIcon(R.drawable.ic_sms_black_24dp)
+						.setContentTitle(num)
+						.setContentText(msg);
+
+		// Sets an ID for the notification
+		int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+		NotificationManager mNotifyMgr =
+				(NotificationManager)  getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+		mNotifyMgr.notify(mNotificationId, mBuilder.build());
 	}
 }

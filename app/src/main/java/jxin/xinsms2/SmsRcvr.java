@@ -1,5 +1,6 @@
 package jxin.xinsms2;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.content.Context;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -20,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by jxin on 2016-12-24.
@@ -39,6 +43,12 @@ import android.widget.Toast;
 public class SmsRcvr extends BroadcastReceiver
 {
 	final SmsManager sms = SmsManager.getDefault();
+
+
+
+
+
+
 	@Override
 	public void onReceive(Context context, Intent intent)
 	{
@@ -62,10 +72,27 @@ public class SmsRcvr extends BroadcastReceiver
 
 
 					// Show Alert
-					int duration = Toast.LENGTH_LONG;
-					Toast toast = Toast.makeText(context,
-							"senderNum: "+ senderNum + ", Xinmessage: " + message, duration);
-					toast.show();
+				//	int duration = Toast.LENGTH_LONG;
+				//	Toast toast = Toast.makeText(context,
+				//			"senderNum: "+ senderNum + ", Xinmessage: " + message, duration);
+				//	toast.show();
+
+					//notification  2017.01.21
+					NotificationCompat.Builder mBuilder =
+							(NotificationCompat.Builder) new NotificationCompat.Builder(this)
+									.setSmallIcon(R.drawable.ic_sms_black_24dp)
+									.setContentTitle(senderNum)
+									.setContentText(message);
+					// Sets an ID for the notification
+					int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+					NotificationManager mNotifyMgr =
+							(NotificationManager)  (context.getSystemService(NOTIFICATION_SERVICE));
+// Builds the notification and issues it.
+					mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+
+
 
 				} // end for loop
 			} // bundle is null
