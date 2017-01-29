@@ -221,21 +221,21 @@ public class MainActivity extends AppCompatActivity
 	}
 
 
-	public  void IssueNoti(String num, String msg)
-	{
-
-		NotificationCompat.Builder mBuilder =
-				(NotificationCompat.Builder) new NotificationCompat.Builder(this)
-						.setSmallIcon(R.drawable.ic_sms_black_24dp)
-						.setContentTitle(num)
-						.setContentText(msg);
-
-		// Sets an ID for the notification
-		int mNotificationId = 001;
-// Gets an instance of the NotificationManager service
-		NotificationManager mNotifyMgr =
-				(NotificationManager)  getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
-		mNotifyMgr.notify(mNotificationId, mBuilder.build());
-	}
+//	public  void IssueNoti(String num, String msg)
+//	{
+//
+//		NotificationCompat.Builder mBuilder =
+//				(NotificationCompat.Builder) new NotificationCompat.Builder(this)
+//						.setSmallIcon(R.drawable.ic_sms_black_24dp)
+//						.setContentTitle(num)
+//						.setContentText(msg);
+//
+//		// Sets an ID for the notification
+//		int mNotificationId = 001;
+//// Gets an instance of the NotificationManager service
+//		NotificationManager mNotifyMgr =
+//				(NotificationManager)  getSystemService(NOTIFICATION_SERVICE);
+//// Builds the notification and issues it.
+//		mNotifyMgr.notify(mNotificationId, mBuilder.build());
+//	}
 }

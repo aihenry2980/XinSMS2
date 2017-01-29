@@ -79,10 +79,13 @@ public class SmsRcvr extends BroadcastReceiver
 
 					//notification  2017.01.21
 					NotificationCompat.Builder mBuilder =
-							(NotificationCompat.Builder) new NotificationCompat.Builder(this)
-									.setSmallIcon(R.drawable.ic_sms_black_24dp)
+							(NotificationCompat.Builder) new NotificationCompat.Builder(context)
+									.setSmallIcon(R.drawable.ic_looks_one_black_24dp)
 									.setContentTitle(senderNum)
+									.addAction(R.drawable.ic_backspace_black_24dp, "Delete", null)
 									.setContentText(message);
+
+									//.setLargeIcon(R.drawable.ic_stat_name);
 					// Sets an ID for the notification
 					int mNotificationId = 001;
 // Gets an instance of the NotificationManager service
